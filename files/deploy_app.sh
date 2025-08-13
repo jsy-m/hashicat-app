@@ -1,7 +1,7 @@
 #!/bin/bash
 # Copyright (c) HashiCorp, Inc.
 
-# Script to deploy a modern web application page with animations.
+# Script to deploy a modern web application page with images and animations.
 
 cat << EOM > /var/www/html/index.html
 <!doctype html>
@@ -35,7 +35,7 @@ cat << EOM > /var/www/html/index.html
         
         /* 텍스트 흔들기 애니메이션 */
         .animated-text {
-            display: inline-block; /* 애니메이션을 위해 인라인 블록 요소로 변경 */
+            display: inline-block;
             animation: shake 1s infinite;
             font-size: 3rem;
             font-weight: 700;
@@ -67,22 +67,17 @@ cat << EOM > /var/www/html/index.html
                 transform: translateY(-10px);
             }
         }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <div class="card-body">
-        <h1 class="animated-text">Hello, ${PREFIX}'s app!</h1>
-        <p class="lead mt-4">Welcome to a lively Skeleton World!
-            <span class="animated-emoji" style="font-size: 2rem;">✨</span>
-        </p>
-        <p class="mt-4">이 페이지는 HTML, CSS, 그리고 애니메이션을 사용하여 동적인 경험을 제공합니다.</p>
-    </div>
-</div>
-
-</body>
-</html>
-EOM
-
-echo "Script complete. An animated web page has been deployed."
+        
+        /* 이미지 부드럽게 확대/축소 애니메이션 */
+        .animated-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            margin-bottom: 2rem;
+            animation: pulse 3s infinite ease-in-out;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100%
