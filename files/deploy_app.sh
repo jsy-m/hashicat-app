@@ -1,7 +1,7 @@
 #!/bin/bash
 # Copyright (c) HashiCorp, Inc.
 
-# Script to deploy a modern, styled web application page.
+# Script to deploy a modern web application page with animations.
 
 cat << EOM > /var/www/html/index.html
 <!doctype html>
@@ -23,59 +23,66 @@ cat << EOM > /var/www/html/index.html
             height: 100vh;
             margin: 0;
             color: #343a40;
+            text-align: center;
         }
-        .card {
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease-in-out;
-            border: none;
+        .container {
+            max-width: 800px;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
-        .card:hover {
-            transform: translateY(-5px);
+        
+        /* 텍스트 흔들기 애니메이션 */
+        .animated-text {
+            display: inline-block; /* 애니메이션을 위해 인라인 블록 요소로 변경 */
+            animation: shake 1s infinite;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #007bff;
         }
-        .card-img-top {
-            border-top-left-radius: 0.25rem;
-            border-top-right-radius: 0.25rem;
-            object-fit: cover;
-            width: 100%;
-            height: 300px;
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            20% { transform: translateX(-5px) rotate(2deg); }
+            40% { transform: translateX(5px) rotate(-2deg); }
+            60% { transform: translateX(-5px) rotate(2deg); }
+            80% { transform: translateX(5px) rotate(-2deg); }
+            100% { transform: translateX(0); }
         }
-        .placeholder-img {
-            background-color: #e9ecef;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #6c757d;
-            font-size: 1.5rem;
+        
+        /* 이모지 통통 튀기기 애니메이션 */
+        .animated-emoji {
+            animation: bounce 2s infinite;
+            display: inline-block;
+            margin: 0 10px;
         }
-        .card-title {
-            font-weight: 600;
-        }
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-        }
-        .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #004085;
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
         }
     </style>
 </head>
 <body>
 
-<div class="container text-center">
-    <div class="card mx-auto" style="max-width: 600px;">
-        <img class="card-img-top placeholder-img" src="http://${PLACEHOLDER}/${WIDTH}/${HEIGHT}" alt="Placeholder Image">
-        <div class="card-body">
-            <h1 class="card-title display-4">Hello, ${PREFIX}'s app!</h1>
-            <p class="card-text lead">It's a modern and elegant Skeleton World. Enjoy your customized page!</p>
-            <a href="#" class="btn btn-primary mt-3">Learn More</a>
-        </div>
+<div class="container">
+    <div class="card-body">
+        <h1 class="animated-text">Hello, ${PREFIX}'s app!</h1>
+        <p class="lead mt-4">Welcome to a lively Skeleton World!
+            <span class="animated-emoji" style="font-size: 2rem;">✨</span>
+        </p>
+        <p class="mt-4">이 페이지는 HTML, CSS, 그리고 애니메이션을 사용하여 동적인 경험을 제공합니다.</p>
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 EOM
 
-echo "Script complete. A modern web page has been deployed."
+echo "Script complete. An animated web page has been deployed."
